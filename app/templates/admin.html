@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+	<h1>Page Admin</h1>
+
+	<h2>Users</h2>
+
+	<table>
+		<tr>
+			{% for k in data[0].__dict__.keys() %}
+				<th>{{k}}</th>
+			{% endfor %}
+		</tr>
+	{% for user in data %}
+		<tr>
+		{% for k,v in user.__dict__.items() %}
+			<td>{{v}}</td>
+		{% endfor %}
+			<td>
+				<form>
+					<button type="submit" formaction="/user/delete" formmethod="post" name="username" value="{{user.username}}" class="btn btn-danger">DELETE</button>
+				</form>
+			</td>
+		</tr>
+	{% endfor %}
+	</table>
+
+{% endblock %}

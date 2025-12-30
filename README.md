@@ -1,1 +1,8 @@
-# SAE-3.01
+```
+pip3 install flask
+
+```
+
+```
+python3 main.py
+```

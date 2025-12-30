@@ -1,0 +1,20 @@
+<nav class="navbar fixed-top navbar-expand-sm bg-light">
+	<div class="container-fluid">
+		<ul class="navbar-nav">
+			{% for menu_item in ["index"] %}
+				<li class="nav-item">
+					<a class="nav-link {{ 'active' if menu_item==metadata.pagename else '' }}" href="{{ url_for(menu_item) }}">{{ menu_item|capitalize }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+			{% if session["role"] == "admin" %}
+				<a href="{{ url_for('admin') }}" class="btn btn-primary">Admin Panel</a>
+			{% endif %}
+			{% if "logged" in session %}
+				{{ session["username"] }}
+				<a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+			{% else %}
+				<a href="{{ url_for('login') }}" class="btn">Login</a>
+			{% endif %}
+	</div>
+</nav>
