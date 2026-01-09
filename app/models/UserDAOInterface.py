@@ -2,7 +2,7 @@
 class UserDAOInterface:
 	"""Interface pour le DAO user"""
 	
-	def createUser(self, username, password, role='lecteur'):
+	def createUser(self, username, password, role='admin'):
 		""" crée un utilisateur """
 		pass
 
@@ -18,9 +18,6 @@ class UserDAOInterface:
 
 	def findAll(self):
 		""" trouve tous les utilisateurs """
-		pass
-
-	def deleteByUsername(self, username):
 		pass
 
 

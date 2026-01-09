@@ -16,3 +16,4 @@ def toFrench(name):
 	return name
 
 app.jinja_env.filters['french'] = toFrench
+

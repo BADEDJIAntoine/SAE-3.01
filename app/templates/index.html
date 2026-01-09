@@ -1,0 +1,80 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<style>
+    .hub-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 50px;
+    }
+    .hub-card {
+        background: white;
+        border-radius: 16px;
+        padding: 40px 20px;
+        text-align: center;
+        text-decoration: none;
+        color: #2d3436;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.08);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+    .hub-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        border-color: #667eea;
+        color: #667eea;
+    }
+    .icon-circle {
+        width: 80px;
+        height: 80px;
+        background: #f8faff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.5rem;
+        color: #667eea;
+    }
+    .badge-stat {
+        display: inline-block;
+        margin-top: 15px;
+        padding: 4px 12px;
+        background: #eef2ff;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 0.85rem;
+    }
+</style>
+
+<div class="container">
+    <div class="text-center mt-4">
+        <h1 class="fw-bold">Tableau de Bord</h1>
+        <p class="text-muted">Bonjour {{ session['nom_utilisateur'] }}, sélectionnez une section pour commencer.</p>
+    </div>
+
+    <div class="hub-grid">
+        <a href="#" class="hub-card">
+            <div class="icon-circle"><i class="bi bi-people"></i></div>
+            <h3>Utilisateurs</h3>
+            <p class="text-muted">Gérer les membres et les accès</p>
+            <div class="badge-stat">{{ stats.nb_users }} inscrits</div>
+        </a>
+
+        <a href="#" class="hub-card">
+            <div class="icon-circle"><i class="bi bi-speaker"></i></div>
+            <h3>Lecteurs</h3>
+            <p class="text-muted">Contrôler la diffusion audio</p>
+            <div class="badge-stat">{{ stats.nb_lecteurs }} appareils</div>
+        </a>
+
+        <a href="#" class="hub-card">
+            <div class="icon-circle"><i class="bi bi-journal-text"></i></div>
+            <h3>Logs</h3>
+            <p class="text-muted">Consulter les actions système</p>
+            <div class="badge-stat">{{ stats.nb_logs }} événements</div>
+        </a>
+    </div>
+</div>
+{% endblock %}

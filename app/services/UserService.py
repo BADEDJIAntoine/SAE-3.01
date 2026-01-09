@@ -8,8 +8,8 @@ class UserService():
 	def __init__(self):
 		self.udao = UserDAO()
 
-	def getUserByUsername(self, username):
-		res = self.udao.findByUsername(username)
+	def getUserByUsername(self, nom_utilisateur):
+		res = self.udao.findByUsername(nom_utilisateur)
 		# petit ajout : ici in verifie si res est une liste. Si ce n'est pas le cas, nous l'imbriquons dans une liste
 		if type(res) is not list: 
 			res = [res] 
@@ -18,11 +18,9 @@ class UserService():
 	def getUsers(self):
 		return self.udao.findAll()
 	
-	def signin(self, username, password):
-		return self.udao.createUser(username, password)
+	def signin(self, nom_utilisateur, motdepasse):
+		return self.udao.createUser(nom_utilisateur, motdepasse)
 
-	def login(self, username, password):
-		return self.udao.verifyUser(username, password)
-	
-	def deleteUser(self, username):
-		return self.udao.deleteByUsername(username)
+	def login(self, nom_utilisateur, motdepasse):
+		return self.udao.verifyUser(nom_utilisateur, motdepasse)
+

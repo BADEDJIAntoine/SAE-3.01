@@ -1,11 +1,9 @@
-
 class User:
-
-    def __init__(self, dico):
-        self.id = dico["id"]
-        self.username = dico["username"]
-        self.role = dico["role"]
-        # nous omettons volontairement le mot de passe, ainsi nous n'avons pas de circulation du mot de passe en dehors du DAO, même en version chiffrée
+    def __init__(self, row):
+        # row est un dictionnaire ou un sqlite3.Row
+        self.id = row["id_utilisateur"]
+        self.username = row["nom_utilisateur"]
+        self.role = row["role"]
 
 
 
