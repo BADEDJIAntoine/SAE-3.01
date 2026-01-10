@@ -4,16 +4,10 @@ from app import app
 from app.controllers.LoginController import reqlogged, us
 
 class IndexController:
-    # ... le reste de ton code reste identique
-
     @app.route("/", methods=['GET'])
     @reqlogged
     def index():
-        # On récupère les stats via notre UserService (qui a déjà le DAO)
         utilisateurs = us.getUsers()
-        
-        # Pour les autres stats, on ouvre une petite connexion rapide ici 
-        # sans passer par un service externe
         db_path = app.root_path + '/database.db'
        # Récupération sécurisée
         utilisateurs = us.getUsers()
@@ -26,7 +20,7 @@ class IndexController:
             stats["nb_logs"] = conn.execute('SELECT COUNT(*) FROM FichierLog').fetchone()[0]
             conn.close()
         except:
-            pass # Si les tables n'existent pas encore, on affiche 0
+            pass 
 
         metadata = {"title": "Accueil Rythmo", "pagename": "index"}
 

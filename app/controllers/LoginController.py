@@ -2,8 +2,8 @@ from flask import render_template, redirect, url_for, request, session, flash, a
 from app import app
 from functools import wraps
 from app.services.UserService import UserService
+from app.services.LogService import add_log
 
-# Initialisation du service
 us = UserService()
 
 def reqlogged(f):
@@ -34,8 +34,6 @@ class LoginController:
     def login():
         msg_error = None
         if request.method == 'POST':
-            # ADAPTATION : On utilise les noms de ton HTML/BDD
-            # .get() évite le crash si le champ est vide
             username = request.form.get("nom_utilisateur")
             password = request.form.get("motdepasse")
             
@@ -43,14 +41,12 @@ class LoginController:
             
             if user:
                 session["logged"] = True
-                # Stockage avec les clés attendues par ta Nav et ton Index
                 session["nom_utilisateur"] = user.username
                 session["role"] = user.role
+                add_log('Connexion', f"L'utilisateur {user.username} s'est connecté.")
                 return redirect(url_for("index"))
             else:
                 msg_error = 'Identifiants invalides'
-        
-        # Le return est en dehors du IF pour garantir une réponse (évite TypeError)
         return render_template('login.html', msg_error=msg_error)
     
     @app.route("/signin", methods=['GET', 'POST'])
@@ -65,6 +61,7 @@ class LoginController:
                 session["logged"] = True
                 session["nom_utilisateur"] = username
                 session["role"] = "lecteur"
+                add_log('Création', f"Nouveau compte créé : {username}")
                 return redirect(url_for('index'))
             else:
                 msg_error = "Erreur lors de la création du compte"
@@ -73,8 +70,8 @@ class LoginController:
 
     @app.route('/logout')
     def logout():
+        user = session.get("nom_utilisateur")
+        add_log('Déconnexion', f"L'utilisateur {user} s'est déconnecté.")
         session.clear()
-        flash('Vous avez été déconnecté')
         return redirect(url_for('login'))
-
 

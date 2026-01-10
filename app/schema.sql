@@ -52,14 +52,10 @@ DROP TABLE IF EXISTS FichierLog;
 
 CREATE TABLE FichierLog (
     id_log INTEGER PRIMARY KEY AUTOINCREMENT,
-    type_fichierlog VARCHAR(50), -- ex: 'info', 'warning', 'error'
+    type_fichierlog VARCHAR(50), 
     message VARCHAR(255),
-    date_fichierlog DATETIME DEFAULT CURRENT_TIMESTAMP
+    date_fichierlog DATETIME DEFAULT (datetime('now', 'localtime'))
 );
-
-INSERT INTO FichierLog (type_fichierlog, message) VALUES ('info', 'Démarrage du système réussi');
-INSERT INTO FichierLog (type_fichierlog, message) VALUES ('warning', 'Tentative de connexion suspecte');
-
 CREATE TABLE Lecteur(
    id_lecteur INT,
    nom_lecteur VARCHAR(50) NOT NULL,

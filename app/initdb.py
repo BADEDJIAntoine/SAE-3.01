@@ -1,22 +1,16 @@
 import sqlite3
 import os
 from app.models.UserDAO import UserSqliteDAO
+
 def init_db():
-    # 1. Définition des chemins (on se base sur l'emplacement de ce fichier)
     base_dir = os.path.dirname(os.path.abspath(__file__))
     db_path = os.path.join(base_dir, 'database.db')
     schema_path = os.path.join(base_dir, 'schema.sql')
-
-    # 2. Connexion à la base de données
     print(f"Connexion à la base de données : {db_path}...")
     connection = sqlite3.connect(db_path)
-
-    # 3. Lecture et exécution du fichier schema.sql
     try:
         with open(schema_path, 'r', encoding='utf-8') as f:
             sql_script = f.read()
-            
-        # executeScript permet de lancer plusieurs commandes SQL d'un coup
         connection.executescript(sql_script)
         connection.commit()
         print("✅ Succès : Les tables ont été créées et initialisées.")
@@ -27,20 +21,19 @@ def init_db():
         print(f"❌ Erreur SQLite : {e}")
     finally:
         connection.close()
-
     print("Insertion des utilisateurs de test...")
     try:
         udao = UserSqliteDAO()
         utilisateurs = [
-            {"nom": "admin_principal", "mdp": "admin123", "role": "Administrateur"},
-            {"nom": "jean_dupont", "mdp": "jean789", "role": "Superviseur"},
-            {"nom": "marie_lefebvre", "mdp": "marie456", "role": "Opérateur"}
+            {"nom": "Antoine", "mdp": "anto123", "role": "Administrateur"},
+            {"nom": "Sarah", "mdp": "sarah123", "role": ""},
+            {"nom": "Janshica", "mdp": "janshica123", "role": ""},
+            {"nom": "Floriane", "mdp": "floriane123", "role": ""},
+            {"nom": "Nassim", "mdp": "nassim123", "role": ""}
         ]
 
         for u in utilisateurs:
-            # On vérifie si l'utilisateur existe déjà pour éviter les erreurs au redémarrage
             if not udao.findByUsername(u["nom"]):
-                # On utilise TA méthode createUser pour hacher le mot de passe
                 udao.createUser(u["nom"], u["mdp"], u["role"])
                 print(f"   👤 Utilisateur '{u['nom']}' créé.")
         
