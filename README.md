@@ -11,7 +11,7 @@ python3 main.py
 python -m app.init_db
 ```
 
-RHYTHMO est une application web complète de gestion et de diffusion musicale automatisée pour espaces commerciaux et publics. Le système permet de contrôler à distance des lecteurs audio (Raspberry Pi), de planifier des playlists par plages horaires et de gérer l'ensemble depuis une interface web centralisée.
+RYTHMO est une application web complète de gestion et de diffusion musicale automatisée pour espaces commerciaux et publics. Le système permet de contrôler à distance des lecteurs audio (Raspberry Pi), de planifier des playlists par plages horaires et de gérer l'ensemble depuis une interface web centralisée.
 
 🎧 Gestion des Lecteurs Audio
 
